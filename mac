@@ -131,21 +131,6 @@ fi
 fancy_echo "Updating Homebrew formulas ..."
 brew update
 
-brew_install_or_upgrade 'git'
-brew_install_or_upgrade 'postgres'
-brew_launchctl_restart 'postgresql'
-brew_install_or_upgrade 'redis'
-brew_launchctl_restart 'redis'
-brew_install_or_upgrade 'the_silver_searcher'
-brew_install_or_upgrade 'vim'
-brew_install_or_upgrade 'ctags'
-brew_install_or_upgrade 'tmux'
-brew_install_or_upgrade 'reattach-to-user-namespace'
-brew_install_or_upgrade 'imagemagick'
-brew_install_or_upgrade 'qt'
-brew_install_or_upgrade 'gh'
-brew_install_or_upgrade 'node'
-
 brew_install_or_upgrade 'rbenv'
 brew_install_or_upgrade 'ruby-build'
 
@@ -175,12 +160,14 @@ fancy_echo "Configuring Bundler ..."
   number_of_cores=$(sysctl -n hw.ncpu)
   bundle config --global jobs $((number_of_cores - 1))
 
-brew_install_or_upgrade 'heroku-toolbelt'
+fancy_echo "Installing Homebrew Cask ..."
+brew tap caskroom/cask
+brew install brew-cask
 
-if ! command -v rcup >/dev/null; then
-  brew_tap 'thoughtbot/formulae'
-  brew_install_or_upgrade 'rcm'
-fi
+brew cask install vagrant
+brew cask install virtualbox
+brew cask install chefdk
+brew cask install iterm2
 
 if [ -f "$HOME/.laptop.local" ]; then
   . "$HOME/.laptop.local"
