@@ -169,6 +169,8 @@ brew cask install virtualbox
 brew cask install chefdk
 brew cask install iterm2
 
+append_to_zshrc 'export LANG=en_US.UTF-8' 1
+
 if [ -f "$HOME/.laptop.local" ]; then
   . "$HOME/.laptop.local"
 fi
